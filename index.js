@@ -2,10 +2,13 @@
  * Created by austin on 9/18/14.
  */
 
-var fs = require('fs')
+var fs = require('fs');
 
-    , util = require('./lib/util')
-    , oauth = require('./lib/oauth')
+//and export
+module.exports = function(config) {
+
+    var util = require('./lib/util')(config)
+    , oauth = require('./lib/oauth')(config)
     , athlete = require('./lib/athlete')
     , athletes = require('./lib/athletes')
     , activities = require('./lib/activities')
@@ -14,7 +17,7 @@ var fs = require('fs')
     , segments = require('./lib/segments')
     , segmentEfforts = require('./lib/segmentEfforts')
     , streams = require('./lib/streams')
-    , uploads = require('./lib/uploads')
+    , uploads = require('./lib/uploads')(config)
     , runningRaces = require('./lib/runningRaces')
     , routes = require('./lib/routes')
     ;
@@ -35,5 +38,5 @@ strava.uploads = uploads;
 strava.runningRaces = runningRaces;
 strava.routes = routes;
 
-//and export
-module.exports = strava;
+return strava
+};
